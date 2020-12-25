@@ -1,205 +1,194 @@
   <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Radio.co - Example Player</title>
-	<meta name="viewport" content="height=666, width=device-width">
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-	<style>
-	@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+  <html lang="en">
 
-	[class*="fontawesome-"]:before {
-	  font-family: 'FontAwesome', sans-serif;
-	}
+  <head>
+  	<meta charset="UTF-8">
+  	<title>Radio.co - Example Player</title>
+  	<meta name="viewport"  width="device-width">
+  	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+  	<style>
+  		@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 
-	body{
-		/* background: #0F2027;  fallback for old browsers 
-		background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);   Chrome 10-25, Safari 5.1-6 
-		background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  		[class*="fontawesome-"]:before {
+  			font-family: 'FontAwesome', sans-serif;
+  		}
 
-		background: #fc4a1a;  /* fallback for old browsers */
-		background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
-		background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  		
 
-		color:#111;
-		font-family:"Open Sans", sans-serif;;
-		width: 380px;
-		height: 665px;
-		margin:0;
-		overflow: hidden;
-	}
-
-	.radioco-playButton-playing:before{
-		font-family: 'FontAwesome', sans-serif;
+  		.radioco-playButton-playing:before {
+			font-family: 'FontAwesome', sans-serif;
 	  content: "\f04b";
-	}
+  		}
 
-	.radioco-playButton-paused:before{
-		font-family: 'FontAwesome', sans-serif;
-	  content:"\f04c";
-	}
+  		.radioco-playButton-paused:before {
+  			font-family: 'FontAwesome', sans-serif;
+  			content: "\f04c";
+  		}
 
-	.radioplayer{
-	  background: #F4F4F4;
-	  width: 370px;
-	  height: 150px;
-	  box-shadow: #ccc 0px 1px 50px;
-	  border-radius:4px;
-	  background-position:center center !important;
-	  background-repeat:no-repeat !important;
-	  background-size: cover !important;
-	  overflow: hidden;
+  		.radioplayer {
+  			background: #F4F4F4;
+  			width: 370px;
+  			height: 150px;
+  			box-shadow: #ccc 0px 1px 50px;
+  			border-radius: 4px;
+  			background-position: center center !important;
+  			background-repeat: no-repeat !important;
+  			background-size: cover !important;
+  			overflow: hidden;
 
-	  -webkit-touch-callout: none;
-	  -webkit-user-select: none;
-	  -khtml-user-select: none;
-	  -moz-user-select: none;
-	  -ms-user-select: none;
-	  user-select: none;
-	}
+  			-webkit-touch-callout: none;
+  			-webkit-user-select: none;
+  			-khtml-user-select: none;
+  			-moz-user-select: none;
+  			-ms-user-select: none;
+  			user-select: none;
+  		}
 
-	.radioco-playButton{
-	  box-shadow: #111 1px 1px 10px;
-	  color: #fff;
-	  position: relative;
-	  top: 50px;
-	  text-align: left;
-	  margin-left: 13.5%;
-	  position: relative;
-	  z-index: 2;
-	  font-size:50px;
-	}
+  		.radioco-playButton {
+  			box-shadow: #111 1px 1px 10px;
+  			color: #fff;
+  			position: relative;
+  			top: 50px;
+			  left: 45%;
+			  transform: translateX(-50%);
+  			text-align: center;
+  			margin-left: 13.5%;
+  			position: relative;
+  			z-index: 2;
+  			font-size: 50px;
+  		}
 
-	.radioco-playButton:active{
-	  color:#ccc;
-	}
+  		.radioco-playButton:active {
+  			color: #ccc;
+  		}
 
-	.radioco-playButton-playing{
-	  font-family: "controls";
-	  position: absolute;
-	  text-size:150%;
-	  text-shadow:#333 0px 0px 15px;
-	}
-
-
-	.radioco-playButton-paused{
-	  font-family: "controls";
-	  position: absolute;
-	  text-size:150%;
-	  text-shadow:#333 0px 0px 15px;
-	}
+  		.radioco-playButton-playing {
+  			font-family: "controls";
+  			position: absolute;
+			  left: 50%;
+  			text-size: 150%;
+  			text-shadow: #333 0px 0px 15px;
+  		}
 
 
-	.radioco-image{
-	  vertical-align: middle;
-	  position: relative;
-	  z-index: 1;
-	  width:150px;
-	  height: 150px;
-	}
-
-	.radioco-bg{
-	  margin-top: -99px;
-	  margin-left: -29px;
-	  -webkit-filter: blur(30px) brightness(0.6);
-	  overflow: hidden;
-	  width: 500px;
-	  position: relative;
-	  left: 70px;
-	  top: -180px;
-	}
-
-	.radioco-information{
-	  display: block;
-	  position: relative;
-	  width: 210px;
-	  color:#fff;
-	  z-index: 1;
-	  float: right;
-	  top:13px;
-	  font-family: 'Open Sans', sans-serif;
+  		.radioco-playButton-paused {
+  			font-family: "controls";
+  			position: absolute;
+			  left: 50%;
+  			text-size: 150%;
+  			text-shadow: #333 0px 0px 15px;
+  		}
 
 
-	}
+  	
 
-	.radioco-information span{
-	  display:block;
-	}
+  		.radioco-information span {
+  			display: block;
+  		}
 
-	.radioco-information input[type="range"]{
-	    background: rgba(255,255,255,0.3);
-	  width: 100px;
-	  display: block;
-	  height: 4px;
-	  -webkit-appearance: none;
-	  -webkit-border-radius: 8px;
-	  margin-top: 20px;
-	  margin-bottom: 20px;
-	  cursor: -webkit-grab;
-	  outline: 0;
-	   }
+  		.radioco-information input[type="range"] {
+  			background: rgba(255, 255, 255, 0.3);
+  			width: 100px;
+  			display: block;
+  			height: 4px;
+  			-webkit-appearance: none;
+  			-webkit-border-radius: 8px;
+  			margin-top: 20px;
+  			margin-bottom: 20px;
+  			cursor: -webkit-grab;
+  			outline: 0;
+  		}
 
-	.radioco-information input[type=range]::-webkit-slider-thumb {
-	  -webkit-appearance: none;
-	  border: none;
-	  width:15px;
-	  height:15px;
-	  border-radius: 10px;
-	  background: #ffffff;
-	  -webkit-transition: box-shadow 0.2s;
+  		.radioco-information input[type=range]::-webkit-slider-thumb {
+  			-webkit-appearance: none;
+  			border: none;
+  			width: 15px;
+  			height: 15px;
+  			border-radius: 10px;
+  			background: #ffffff;
+  			-webkit-transition: box-shadow 0.2s;
 
-	}
-	.radioco-information input[type=range]::-webkit-slider-thumb:hover {
-	  box-shadow:#fff 1px 1px 20px;
-	}
+  		}
 
-	.radioco-information input[type=range]:active, .information input[type=range]:focus {
-	  outline: 0;
-	}
+  		.radioco-information input[type=range]::-webkit-slider-thumb:hover {
+  			box-shadow: #fff 1px 1px 20px;
+  		}
 
-	.radioco-elapsedTime{
-	  opacity:0.4;
-	  font-size:14px;
-	}
+  		.radioco-information input[type=range]:active,
+  		.information input[type=range]:focus {
+  			outline: 0;
+  		}
 
-	.header{
-		display: flex;
-	    align-items: center;		
-	    margin-bottom: 20px;
-	    padding: 10px;
-	    background: white; 
-	    border-radius: 0 0 5px 5px;
-	}
+  		.radioco-elapsedTime {
+  			opacity: 0.4;
+  			font-size: 14px;
+			  margin-left: 270%;
+  		}
 
-	.header h5{
-		margin-left: 10px;
-		font-family: 'Open Sans', sans-serif;
-		display: inline-block;
-		color: #000000;
-	}
 
-	.player-wrapper{
-		margin: 5px;
-	}
 
-	.presenter-info{
-		height: 360px;
-		width: 100%;
-		background: white;
-		margin-top: 20px;
-		border-radius: 5px;
-	}
+  		.player-wrapper {
+			display: grid;
+		place-items: center;
+		height: 100%;
+  		}
 
-	.presenter-img{
-		background-image: url(https://placeimg.com/800/400/any);
-		border-radius: 5px 5px 0 0;
-		height: 150px;
-		/* width: 100%; */
+  		.presenter-info {
+  			
+  			/* width: 100%; */
+  			background: white;
+  			margin-top: 20px;
+  			border-radius: 5px;
+			  border: 10 solid black;
+  		}
+
+  		/* .presenter-img {
+  			background-image: url('https://babylonradio.com/wp-content/uploads/2020/11/player_HOUR_OF_EIRE_290x180_button-1.jpg');
+  			border-radius: 5px 5px 0 0;
+  			height: 150px;
+  			/* width: 100%; */
+  			background-size: cover;
+  		} */
+
+  
+
+  		.meta {
+  			display: flex;
+  			align-items: center;
+  		}
+
+  		.meta .time {
+  			display: inline-block;
+  			font-size: 15px;
+  			color: grey;
+
+  		}
+
+  		#presenter-name {
+  			margin: 5px 0;
+			  font-size: 1.2rem;
+  		}
+.section {
+	width: 310px;
+	height: 300px !important;
+	background-color: rgba(14, 14, 14, 0.9);
+	text-align: center;
+	color: #fff;
+	padding: 2rem;
+}
+  		.content {
+  			/* max-height: 110px; */
+  			overflow: hidden;
+  		}
+
+  		/* .radioplayer {
+  			display: none;
+  		} */
+
+		  
+	#listen-live {
+		height: 200px;
 		background-size: cover;
-	}
-
-	.section{
-		padding: 10px;
 	}
 	.waves {
 	  position: relative;
@@ -252,87 +241,182 @@
 	    transform-origin: center;
 	  }
 	}
-	.meta{
-		display: flex;
-		align-items: center;
+
+	body {
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		display: grid;
+		place-items: center;
+		overflow-y: hidden !important;
 	}
-	.meta .time{
-		display: inline-block;
-		font-size: 15px;
-		color:grey;
-
+	.live {
+		font-size: 1.2rem;
+		vertical-align: middle;
+		/* margin-top: -10px; */
 	}
-	.presenter-name{
-		margin:5px 0;
+	/* * {
+		border: 2px solid black !important;
+	} */
+ .wave-group {
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 background-color: rgb(184, 181, 181) !important;
+ }
+	.show-name {
+		text-transform: uppercase;
 	}
+.show-bar {
+	width: 100px;
+	height: 5px;
+	background-color: white;
+}
 
-	.content{
-		max-height: 110px;
-		overflow: hidden;
-	}
+.presenter-info, .player-wrapper {
+	background-color: transparent;
+}
+  	</style>
+  </head>
 
-	</style>
-</head>
-<body>
+  <body>
 
-	<div class="header">
-		<div class="logo">
-			<img src="https://babylonradio.com/wp-content/uploads/2018/10/logo-1.png" width="60" height="auto">
-		</div>
-		<h5>Celebrating Cultures, Promoting Integration</h5>
-	</div>
 
-	<div class="player-wrapper">
+  	<div class="player-wrapper">
 
-		<!-- The player decleration -->
-		<div class="radioplayer"
-		data-src="https://s2.radio.co/s87a2a134a/listen"
-		data-autoplay="true"
-		data-playbutton="true"
-		data-volumeslider="true"
-		data-elapsedtime="true"
-		data-nowplaying="true"
-		data-showplayer="true"
-		data-volume="50"></div>
+  		<!-- The player decleration -->
 
-		<div class="presenter-info">
-			<div class="presenter-img" style="background-image: url(https://placeimg.com/800/400/animals);">
-				<img src="">
-			</div>
-			<div class="section">
-				<div class="meta">
-					<div class="waves"></div>
-					<span class="time">11:00-17:00</span>
+
+  		<div class="presenter-info">
+  			<div id="listen-live" class="presenter-img"
+  				style="background-image: url('https://babylonradio.com/wp-content/uploads/2020/11/player_HOUR_OF_EIRE_290x180_button-1.jpg');">
+  				<img src="">
+			  </div>
+			  <div class="wave-group"><div class="waves"></div><span class="live">LIVE</span></div>
+			  
+  			<div class="section">
+  				<!-- <span class="radioco-nowPlaying"></span> -->
+				  <h3 class="show-name"><span class="show-bar">########</span></h3>
+				 
+  				<div class="content">
+  					<p id="radio-co-song-title" style="display: none;"><script src="https://embed.radio.co/embed/s87a2a134a/song.js"></script>
+					  </p>
 					
-				</div>	
-				<h3 class="presenter-name">DJ NAME AHEADS</h3>
-				<div class="content">
-					
-					<p>
-						James Blake + Billie Eilish + N.E.R.D
-						Blissed-out warm sounds to relax to.
+  					<p id="presenter-name">
+						....
+  					</p>
 
-						FIRST BROADCAST: MON 01 APR
 
-						AVAILABLE FOR 28 DAYS
+				  </div>
+				  
+				  <div class="radioplayer" data-src="https://s2.radio.co/s87a2a134a/listen" data-autoplay="true"
+				  data-playbutton="true" data-elapsedtime="true" data-nowplaying="false" data-showplayer="false"
+				  data-volume="50" data-volumeslider="false"></div>
+  				
+  			</div>
 
-					</p>
-				</div>			
-			</div>
+  		</div>
 
-		</div>
 
-	</div>
+  	</div>
 
-</body>
+  </body>
 
-<!-- Include the libraries -->
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://public.radio.co/playerapi/jquery.radiocoplayer.min.js"></script>
-<script>
+  <!-- Include the libraries -->
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://public.radio.co/playerapi/jquery.radiocoplayer.min.js"></script>
+  <script>
+  	//initialise the plugin with the element
+  	$('.radioplayer').radiocoPlayer();
+  	let play = document.getElementById("play");
+  	let presenter = document.querySelector(".presenter-img");
+  	play.addEventListener("click", function () {
+  		// radioplayer.setAttribute("data-autoplay", 'false');
+  		alert('hi')
+  	});
+  </script>
+  <script type="text/javascript">
+  	setInterval(function () {
+  		var str = "";
+  		var songTitle = document.getElementById("radio-co-song-title").textContent;
+		  var presenterName = document.getElementById('presenter-name');
+		  let showName = document.querySelector(".show-name");
+  		var splitSongTitle = songTitle.split("-");
+		  var checkSongTitle = str.concat(splitSongTitle[0]);
+		  var showNameString = splitSongTitle[1];
+		  showName.textContent =showNameString;
+		  presenterName.textContent = checkSongTitle;
+		// console.log(showName);
+  		// alert(realsong);
+  		if (checkSongTitle == "Gary Meade ") {
+			  document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_Through_The_Years_290x180.jpg')";
+			  document.body.style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_Through_The_Years_290x180.jpg')";
+					  	 	}
+					  	 	
+					  	 	// If the presenter is "Mark Hanratty ". this image will set ---- IF THERE IS NEW PRESENTER, ADD ANOTHER else if BLOCK
+					  	 	
+							else if (checkSongTitle == "Mark Hanratty ") {
+								document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_SONGWRITER_SPOTLIGHT_290x180-1.jpg')";
+								document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)),url('https://babylonradio.com/wp-content/uploads/2020/12/player_SONGWRITER_SPOTLIGHT_290x180-1.jpg')";
+					  	 	}
+					  	 	else if (checkSongTitle == "Cecilia Ramos ") {
+								   document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/cecilia_ramos_player_no_button.jpg')";
+								   document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)),url('https://babylonradio.com/wp-content/uploads/2020/12/cecilia_ramos_player_no_button.jpg')";
+					  	 	}
+					  	 	else if (checkSongTitle == "Thomas McCarthy ") {
+								   document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_FREEDOM_AT_FIVE_290x180.jpg')";
+								   document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)),url('https://babylonradio.com/wp-content/uploads/2020/12/player_FREEDOM_AT_FIVE_290x180.jpg')";
+					  	 	}
+					  	 	else if (checkSongTitle == "Colm Slattery ") {
+								   document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_FRUIT_SONIC_290x180.jpg')";
+								   document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)),url('https://babylonradio.com/wp-content/uploads/2020/12/player_FRUIT_SONIC_290x180.jpg')";
+					  	 	}
+					  	 	else if(checkSongTitle == "Oisin Coyne "){
+								   document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_ROAR_THE_SCORE_290x180.jpg')";
+								   document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)),url('https://babylonradio.com/wp-content/uploads/2020/12/player_ROAR_THE_SCORE_290x180.jpg')";
+							}
+					  	 	else if(checkSongTitle == "Ilse Mannessen "){
+								   document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_MOON_HOUR_290x180.jpg')";
+								   document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)),url('https://babylonradio.com/wp-content/uploads/2020/12/player_MOON_HOUR_290x180.jpg')";
+					  	 	}
+					  	    else if((checkSongTitle == "Deuce " ) || (checkSongTitle == "Matt Barker ")){
+								  document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/deuce.jpg')";
+								  document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)),url('https://babylonradio.com/wp-content/uploads/2020/12/deuce.jpg')";
+					  	 	}
+					  	    else if(checkSongTitle == "Chloe Mc Donnell "){
+								  document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_FEEL_GOOD_WEEKEND_290x180.jpg')";
+								  document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)),url('https://babylonradio.com/wp-content/uploads/2020/12/player_FEEL_GOOD_WEEKEND_290x180.jpg')";
+					  	 	}
+							else if(checkSongTitle == "Royce Laroca "){
+								document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_REAL_TALK_SHOW_290x180.jpg')";
+								document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)),url('https://babylonradio.com/wp-content/uploads/2020/12/player_REAL_TALK_SHOW_290x180.jpg')";
+					  	 	}
+							else if(checkSongTitle == "Sophie Stapleton "){
+								document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_HOUR_OF_EIRE_290x180.jpg')";
+								document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)), url('https://babylonradio.com/wp-content/uploads/2020/12/player_HOUR_OF_EIRE_290x180.jpg')";
+					  	 	}
+					  	 	else if(checkSongTitle == "Peter Coleman "){
+								   document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_AFTER_EIGHT_SHOW_290x180-1.jpg')";
+								   document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)),url('https://babylonradio.com/wp-content/uploads/2020/12/player_AFTER_EIGHT_SHOW_290x180-1.jpg')";
+					  	 	}
+					  	 	else if(checkSongTitle == "Sukrity Sharma "){
+								  document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_ROCK_NIGHTS_290x180.jpg')";
+								  document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)),url('https://babylonradio.com/wp-content/uploads/2020/12/player_ROCK_NIGHTS_290x180.jpg')";
+					  	 	}
+					  	 	else if(checkSongTitle == "Jerline Gandhi "){
+								  document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_REFLECTIONS_OF_A_BUBBLE_290x180.jpg')";
+								  document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)), url('https://babylonradio.com/wp-content/uploads/2020/12/player_REFLECTIONS_OF_A_BUBBLE_290x180.jpg')";
+					  	 	}
+					  	 	else if(checkSongTitle == "Jonathan Maby "){
+								  document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/12/player_DJ_JON_MABY_290x180.jpg')";
+								  document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)), url('https://babylonradio.com/wp-content/uploads/2020/12/player_DJ_JON_MABY_290x180.jpg')";
+					  	 	}
+							 else{document.getElementById("listen-live").style.backgroundImage = "url('https://babylonradio.com/wp-content/uploads/2020/11/Pure_Vibes_On_Air_presenters_player_home.jpg')";
+							 document.body.style.backgroundImage = "linear-gradient(rgba(0, 0, 0, 0.80), rgba(222, 222, 222, 0.6)), url('https://babylonradio.com/wp-content/uploads/2020/11/Pure_Vibes_On_Air_presenters_player_home.jpg')";
+							}
 
-//initialise the plugin with the element
-$('.radioplayer').radiocoPlayer();
 
-</script>
-</html>
+  	}, 2000);
+  </script>
+
+  </html>
